@@ -15,6 +15,7 @@ class CreateCartesTable extends Migration
     {
         Schema::create('cartes', function (Blueprint $table) {
             $table->id();
+            $table->string('matricule');
             $table->string('nom');
             $table->string('prenom');
             $table->string('poste');
