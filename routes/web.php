@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('liste_carte', [CarteController::class, 'index'])->name('liste');
+
+Route::get('formulaire_carte', [CarteController::class, 'create'])->name('formulaire');
+
+Route::post('insertion', [CarteController::class, 'store'])->name('insertion');
