@@ -17,9 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+// Route::get('liste_gestion_perso', [Gestion_persoController::class, 'index'])->name('liste');
 
-Route::get('liste_carte', [CarteController::class, 'index'])->name('liste');
+// Route::get('formulaire_gestion_perso', [Gestion_persoController::class, 'create'])->name('formulaire');
 
-Route::get('formulaire_carte', [CarteController::class, 'create'])->name('formulaire');
+// Route::post('insertion', [Gestion_persoController::class, 'store'])->name('insertion');
 
-Route::post('insertion', [CarteController::class, 'store'])->name('insertion');
+// Route::post('liste_gestion_perso', [Gestion_persoController::class, 'destroy'])->name('liste');
+
+Route::resource('gestion_carte', CarteController::class);
+
+Route::get('supprimer_carte/{id}', [CarteController::class, 'destroy']);
+
+// Route::get('modifier_carte/{id}', [CarteController::class, 'edit']);
+// Route::get('carte_carte/{id}', [CarteController::class, 'show']);

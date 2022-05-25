@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Carte;
 use Illuminate\Http\Request;
+use App\Models\Carte;
+use Illuminate\Support\Facades\Storage;
+
 
 class CarteController extends Controller
 {
@@ -14,7 +16,7 @@ class CarteController extends Controller
      */
     public function index()
     {
-        return view('carte', [
+        return view('liste', [
             'cartes' => Carte::all()
         ]);
     }
@@ -37,8 +39,17 @@ class CarteController extends Controller
      */
     public function store(Request $request)
     {
-        Carte::create($request->all());
-        return redirect()->route('liste');
+        Carte::create([
+            'matricule' => $request->matricule,
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'poste' => $request->poste,
+            'titre' => $request->titre,
+            'telephone' => $request->telephone,
+            'email' => $request->email,
+            'photo' => $request->photo->store('img_carte','public')
+        ]);
+        return redirect()->route('gestion_carte.index');
     }
 
     /**
@@ -47,9 +58,13 @@ class CarteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+ 
+
     public function show($id)
     {
-        //
+        return view('show', [
+            'finds' => Carte::find($id),
+        ]);
     }
 
     /**
@@ -60,9 +75,10 @@ class CarteController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('edit', [
+            'finds' => Carte::find($id),
+        ]);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -72,9 +88,11 @@ class CarteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $pers = Carte::find($id);
+        $pers->update($request->all());
 
+        return redirect()->route('gestion_carte.index');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -83,6 +101,9 @@ class CarteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $carte = Carte::find($id);
+        $carte->delete();
+
+        return redirect()->route('gestion_carte.index');
     }
 }

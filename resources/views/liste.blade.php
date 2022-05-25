@@ -2,40 +2,39 @@
 @section('contenu')
 
 <div class="container">
+    @if (Session::has('supprimer'))
+    <span>{{ Session::get('supprimer') }}</span>
+
+    @endif
     <table class="table">
+    <h2 class="m-2" style="font-family: Algerian; text-align: center;">LISTE DES CARTES DU PERSONNEL HCR BURKINA FASO</h2>
         <thead>
           <tr>
-            <th scope="col">MATRICULE</th>
-            <th scope="col">NOM</th>
-            <th scope="col">PRENOM</th>
-            <th scope="col">POSTE</th>
-            <th scope="col">TITRE</th>
-            <th scope="col">TELEPHONE</th>
-            <th scope="col">E-MAIL</th>
-            <th scope="col">PHOTO</th>
-            <th width="280px">ACTION</th>
+            <th scope="col">Id</th>
+            <th scope="col">Matricule</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Poste</th>
+            <th scope="col">Titre</th>
+            <th scope="col">Telephone</th>
+            <th scope="col">Email</th>
+            <th colspan="3">Actions</th>
           </tr>
         </thead>
         <tbody>
          @foreach($cartes as $carte)
          <tr>
             <th scope="row">{{$carte->id}}</th>
+            <td>{{$carte->matricule}}</td>
             <td>{{$carte->nom}}</td>
             <td>{{$carte->prenom}}</td>
             <td>{{$carte->poste}}</td>
             <td>{{$carte->titre}}</td>
             <td>{{$carte->telephone}}</td>
             <td>{{$carte->email}}</td>
-            <td>{{$carte->photo}}</td>
-            <td>
-                <form action="{{route('destroy',$carte->id)}}" method="POST">
-                  <a class="btn btn-primary" href="{{route('edit',$carte->id)}}">Edit</a>
-                  <a class="btn btn-info" href="{{route('show',$carte->id)}}">Show</a>
-                  @csrf
-                  @method ('DELETE')
-                  <button  class="btn btn-danger" type="submit">Suprimer</button>
-                </form>
-            </td>
+            <td> <a class="button" href="{{route('gestion_carte.show', [$carte->id]) }}"><img src="{{ asset('img/carte.ico') }}" alt=""> </a> </td>
+            <td> <a class="button" href="{{route('gestion_carte.edit', [$carte->id]) }}"><img src="{{ asset('img/modif.ico') }}" alt=""></a></td>
+            <td> <a class="button" href="{{url('supprimer_carte/'.$carte->id)}}"><img src="{{ asset('img/delete.jpg') }}" alt=""></a></td>
           </tr>
          @endforeach
         </tbody>
