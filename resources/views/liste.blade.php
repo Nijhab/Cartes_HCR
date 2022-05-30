@@ -1,13 +1,14 @@
 @extends('layout.main')
 @section('contenu')
-
+<div class="nic_bg">
 <div class="container">
     @if (Session::has('supprimer'))
     <span>{{ Session::get('supprimer') }}</span>
 
     @endif
-    <table class="table">
-    <h2 class="m-2" style="font-family: Algerian; text-align: center;">LISTE DES CARTES DU PERSONNEL HCR BURKINA FASO</h2>
+    <table class="table bg-light">
+    <h2 class="m-2 bg-light" style="font-family: Algerian; text-align: center;">LISTE DES CARTES DU PERSONNEL HCR BURKINA FASO</h2>
+    <h3><a href="{{route('gestion_carte.create') }}"><span class="glyphicon glyphicon-plus"></span> <button type="button" class="btn btn-outline-primary">Ajouter une carte</button></a></h3>
         <thead>
           <tr>
             <th scope="col">Id</th>
@@ -39,6 +40,7 @@
          @endforeach
         </tbody>
       </table>
+</div>
 </div>
 
 @endsection

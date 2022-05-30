@@ -1,8 +1,6 @@
 @extends('layout.main')
 @section('contenu')
-
-<div class="nic_bg " style="height: 520px;">
-<h1 class="text-center bg-light">CARTE DE SERVICE A IMPRIMER DE {{$finds->nom}} {{$finds->prenom}}</h1>
+<h1 class="text-center">CARTE DE SERVICE A IMPRIMER DE {{$finds->nom}} {{$finds->prenom}}</h1>
 
 <div class="card m-3" style="max-width: 540px;" onload="window.print()">
   <div class="row g-0">
@@ -21,7 +19,6 @@
       </div>
     </div>
   </div>
-</div>
 </div>
 
 @endsection
